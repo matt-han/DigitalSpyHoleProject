@@ -2,16 +2,11 @@ package de.beuth.digitalspyhole;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 public class Splash extends Activity {
 
@@ -24,8 +19,9 @@ public class Splash extends Activity {
             public void run(){
                 try{
                     sleep(5000);
-                    Intent menuIntent = new Intent("de.beuth.digitalspyhole.MAINACTIVITY");
-                    startActivity(menuIntent);
+                    Intent intent = new Intent(Splash.this,OverView.class);
+                    //Intent menuIntent = new Intent("de.beuth.digitalspyhole.MENU");
+                    startActivity(intent);
                 }
                 catch(InterruptedException e){
                     e.printStackTrace();

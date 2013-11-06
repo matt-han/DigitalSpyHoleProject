@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class Control extends Activity implements View.OnClickListener {
 
     private Button connect;
     private Button open;
