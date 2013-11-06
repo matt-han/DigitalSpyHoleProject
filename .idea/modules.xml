@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DigitalSpyHole/DigitalSpyHole.iml" filepath="$PROJECT_DIR$/DigitalSpyHole/DigitalSpyHole.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DigitalSpyHoleProject.iml" filepath="$PROJECT_DIR$/DigitalSpyHoleProject.iml" />
+    </modules>
+  </component>
+</project>
+
