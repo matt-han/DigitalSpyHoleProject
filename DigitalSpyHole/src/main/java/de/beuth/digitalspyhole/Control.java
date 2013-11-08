@@ -28,11 +28,13 @@ public class Control extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //refer to the id's
         connect = (Button)findViewById(R.id.connect_door);
         open = (Button)findViewById(R.id.open_door);
         status = (ProgressBar)findViewById(R.id.status);
         videoView = (VideoView)findViewById(R.id.videoView1);
 
+        //connect to the listener
         connect.setOnClickListener(this);
         open.setOnClickListener(this);
 
