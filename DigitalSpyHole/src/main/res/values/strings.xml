@@ -3,7 +3,7 @@
 
     <string name="app_name">DigitalSpyHole</string>
     <string name="connect">Connect</string>
-    <string name="open">Open</string>
+    <string name="open">Open Door</string>
     <string name="title_activity_screener">MainActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

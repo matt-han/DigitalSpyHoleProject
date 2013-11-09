@@ -22,7 +22,9 @@ public class Control extends Activity implements View.OnClickListener {
     private ProgressDialog pDialog;
     private VideoView videoView;
 
-    private String videoUrl = "http://....";
+    //URL to motion server
+    private String videoUrl = "http://192.168.1.23:8081/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class Control extends Activity implements View.OnClickListener {
         // Create a progressbar
         pDialog = new ProgressDialog(Control.this);
         // Set progressbar title
-        pDialog.setTitle("Android Video Streaming Tutorial");
+        pDialog.setTitle(" loading DigitalSpy");
         // Set progressbar message
         pDialog.setMessage("Buffering...");
         pDialog.setIndeterminate(false);
