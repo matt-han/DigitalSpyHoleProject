@@ -16,9 +16,8 @@ import android.widget.VideoView;
 
 public class Control extends Activity implements View.OnClickListener {
 
-    private Button connect;
+
     private Button open;
-    private ProgressBar status;
     private ProgressDialog pDialog;
     private VideoView videoView;
 
@@ -31,13 +30,10 @@ public class Control extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         //refer to the id's
-        connect = (Button)findViewById(R.id.connect_door);
         open = (Button)findViewById(R.id.open_door);
-        status = (ProgressBar)findViewById(R.id.status);
         videoView = (VideoView)findViewById(R.id.videoView1);
 
         //connect to the listener
-        connect.setOnClickListener(this);
         open.setOnClickListener(this);
 
         // Create a progressbar
@@ -83,9 +79,6 @@ public class Control extends Activity implements View.OnClickListener {
          * result:  when the connection is finished the videoView shows the stream of the web server.
          */
         switch(v.getId()){
-            case R.id.connect_door:
-                startActivity(new Intent(this, Webserver.class));
-                break;
             case R.id.open_door:
                 startActivity(new Intent(this, OpenDoor.class));
                 break;
