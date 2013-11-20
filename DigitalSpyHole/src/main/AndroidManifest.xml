@@ -44,6 +44,15 @@
             android:name="de.beuth.digitalspyhole.Database"
             android:label="@string/title_activity_database" >
         </activity>
+        <activity
+            android:name="de.beuth.digitalspyhole.registration.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="de.beuth.digitalspyhole.registration.SignUp"
+            android:label="@string/title_activity_sign_up" >
+        </activity>
     </application>
-
+    <!-- Allow to connect with internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

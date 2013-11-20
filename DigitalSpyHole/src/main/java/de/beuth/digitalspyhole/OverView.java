@@ -1,46 +1,67 @@
 package de.beuth.digitalspyhole;
 
 import android.app.Activity;
-import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 
-public class OverView extends Activity implements View.OnClickListener {
+import de.beuth.digitalspyhole.userpool.*;
+import de.beuth.digitalspyhole.registration.*;
+public class OverView extends Activity  {
 
-    private Button control;
-    private Button database;
+    Button control;
+    Button database;
+    UserFunctions userFunctions;
+    Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
-
         control = (Button)findViewById(R.id.menu_control);
         database = (Button)findViewById(R.id.menu_database);
-    }
+        btnLogout = (Button) findViewById(R.id.btnLogout);
 
+        // Check login status in database
+        userFunctions = new UserFunctions();
+        if(userFunctions.isUserLoggedIn(getApplicationContext())){
+            // user already logged in show databoard
+            setContentView(R.layout.activity_menu);
+            btnLogout = (Button) findViewById(R.id.btnLogout);
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.menu_control:
-                startActivity(new Intent(this, Control.class));
-                break;
-            case R.id.menu_database:
-                startActivity(new Intent(this, Database.class));
-                break;
-            default:
-                break;
+            btnLogout.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    switch(v.getId()){
+                        case R.id.menu_control:
+                            startActivity(new Intent(getApplicationContext(), Control.class));
+                            break;
+                        case R.id.menu_database:
+                            startActivity(new Intent(getApplicationContext(), Database.class));
+                            break;
+                        case R.id.btnLogout:
+                            userFunctions.logoutUser(getApplicationContext());
+                            Intent login = new Intent(getApplicationContext(), Login.class);
+                            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(login);
+                            // Closing dashboard screen
+                            finish();
+                        default:
+                            break;
+                    }
+                }
+            });
+
+        }else{
+            // user is not logged in show login screen
+            Intent login = new Intent(getApplicationContext(), Login.class);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(login);
+            // Closing dashboard screen
+            finish();
         }
+
     }
+
 }

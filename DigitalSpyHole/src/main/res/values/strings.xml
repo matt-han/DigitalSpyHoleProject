@@ -10,5 +10,8 @@
     <string name="title_activity_splash">Splash</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_database">Database</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_sign_up">SignUp</string>
 
 </resources>

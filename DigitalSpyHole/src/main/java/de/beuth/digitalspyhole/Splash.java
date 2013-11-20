@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import de.beuth.digitalspyhole.registration.Login;
+
 public class Splash extends Activity {
 
     @Override
@@ -19,7 +21,7 @@ public class Splash extends Activity {
             public void run(){
                 try{
                     sleep(5000);
-                    Intent intent = new Intent(Splash.this,OverView.class);
+                    Intent intent = new Intent(Splash.this,Login.class);
                     //Intent menuIntent = new Intent("de.beuth.digitalspyhole.MENU");
                     startActivity(intent);
                 }

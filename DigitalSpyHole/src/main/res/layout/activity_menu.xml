@@ -22,5 +22,18 @@
         android:layout_width="fill_parent"
         android:text="Database"
         android:textStyle="bold"/>
+
+        <Button android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout Me"
+            android:textSize="20dip"
+            android:textColor="#21dbd4"
+            android:textStyle="bold"
+            android:id="@+id/btnLogout"
+            android:layout_marginTop="80dip"
+            android:background="@null"/>
     </LinearLayout>
+
+
+
 </LinearLayout>
