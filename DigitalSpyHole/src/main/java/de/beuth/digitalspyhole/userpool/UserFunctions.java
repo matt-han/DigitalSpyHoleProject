@@ -30,7 +30,7 @@ public class UserFunctions {
 
     /**
      * function make Login Request
-     * @param
+     * @param name
      * @param password
      * */
     public JSONObject loginUser(String name, String password){

@@ -62,7 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
-        values.put(KEY_UID, uid); // Email
+        values.put(KEY_UID, uid);
         values.put(KEY_CREATED_AT, created_at); // Created At
 
         // Inserting Row
@@ -83,9 +83,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if(cursor.getCount() > 0){
             user.put("name", cursor.getString(1));
-            user.put("email", cursor.getString(2));
-            user.put("uid", cursor.getString(3));
-            user.put("created_at", cursor.getString(4));
+            user.put("uid", cursor.getString(2));
+            user.put("created_at", cursor.getString(3));
         }
         cursor.close();
         db.close();
