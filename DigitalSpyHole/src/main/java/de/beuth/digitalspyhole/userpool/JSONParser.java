@@ -1,5 +1,7 @@
 package de.beuth.digitalspyhole.userpool;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -22,58 +24,95 @@ import java.util.List;
 /**
  * Created by KingLui on 20.11.13.
  */
-public class JSONParser {
+public class JSONParser  {
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
+    String mUrl;
+    List <NameValuePair> mParams;
+    Context mContext;
 
-    public JSONParser() {
+    public JSONParser(String url, List <NameValuePair> params, Context context) {
+        mUrl = url;
+        mParams = params;
+        mContext = context;
+        new innerJSONParser().execute(url);
     }
 
-    public JSONObject getJSONFromUrl(String url, List <NameValuePair> params){
 
-        // Making HTTP request
-        try {
-            // defaultHttpClient
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+    public JSONObject getJSONFromUrl(){
+        Log.i("JSON3", jObj.toString());
+      return jObj;
+    }
 
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            is = httpEntity.getContent();
+    private class innerJSONParser extends AsyncTask <String, Void, JSONObject>
+    {
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "n");
+        @Override
+        protected JSONObject doInBackground(String... params) {
+
+            // Making HTTP request
+            try {
+                // defaultHttpClient
+                DefaultHttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost(mUrl);
+                httpPost.setEntity(new UrlEncodedFormEntity(mParams));
+
+                publishProgress();
+
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                is = httpEntity.getContent();
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            is.close();
-            json = sb.toString();
-            Log.e("JSON", json);
-        } catch (Exception e) {
-            Log.e("Buffer Error", "Error converting result " + e.toString());
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "n");
+                }
+                is.close();
+                json = sb.toString();
+
+                Log.i("JSON1", json);
+            } catch (Exception e) {
+                Log.e("Buffer Error", "Error converting result " + e.toString());
+            }
+
+            // try parse the string to a JSON object
+            try {
+                return new JSONObject(json);
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            }
+
+            // return JSON String
+            return null;
         }
 
-        // try parse the string to a JSON object
-        try {
-            jObj = new JSONObject(json);
-        } catch (JSONException e) {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            Log.i("JSON2", jsonObject.toString());
+            jObj = jsonObject;
         }
 
-        // return JSON String
-        return jObj;
-
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            try {
+                this.wait(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -53,7 +53,7 @@ public class Login extends ActionBarActivity {
             public void onClick(View view) {
                 String name = inputName.getText().toString();
                 String password = inputPassword.getText().toString();
-                UserFunctions userFunction = new UserFunctions();
+                UserFunctions userFunction = new UserFunctions(Login.this);
                 JSONObject json = userFunction.loginUser(name, password);
 
                 // check for login response

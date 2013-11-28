@@ -1,6 +1,8 @@
 package de.beuth.digitalspyhole.registration;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SyncStatusObserver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +17,7 @@ import de.beuth.digitalspyhole.R;
 import de.beuth.digitalspyhole.userpool.*;
 import de.beuth.digitalspyhole.*;
 
-public class SignUp extends ActionBarActivity {
+public class SignUp extends Activity {
 
     Button btnRegister;
     Button btnLinkToLogin;
@@ -36,7 +38,6 @@ public class SignUp extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         // Importing all assets like buttons, text fields
         inputName = (EditText) findViewById(R.id.registerName);
         inputPassword = (EditText) findViewById(R.id.registerPassword);
@@ -49,10 +50,10 @@ public class SignUp extends ActionBarActivity {
             public void onClick(View view) {
                 String name = inputName.getText().toString();
                 String password = inputPassword.getText().toString();
-                UserFunctions userFunction = new UserFunctions();
+                UserFunctions userFunction = new UserFunctions(SignUp.this);
                 JSONObject json = userFunction.registerUser(name, password);
-
                 // check for login response
+
                 try {
                     if (json.getString(KEY_SUCCESS) != null) {
                         registerErrorMsg.setText("");
@@ -88,8 +89,7 @@ public class SignUp extends ActionBarActivity {
         btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        Login.class);
+                Intent i = new Intent(getApplicationContext(),Login.class);
                 startActivity(i);
                 // Close Registration View
                 finish();

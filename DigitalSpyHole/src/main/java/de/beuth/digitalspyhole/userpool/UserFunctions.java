@@ -1,6 +1,7 @@
 package de.beuth.digitalspyhole.userpool;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -14,18 +15,15 @@ import java.util.List;
  */
 public class UserFunctions {
 
-    private JSONParser jsonParser;
-
-
-    private static String loginURL = "http://192.168.1.23/ah_login_api/";
-    private static String registerURL = "http://192.168.1.23/ah_login_api/";
+    private static String loginURL = "http://192.168.43.212/android_api/";
+    private static String registerURL = "http://192.168.43.212/android_api/";
 
     private static String login_tag = "login.xml";
     private static String register_tag = "register";
-
+    Context mContext;
     // constructor
-    public UserFunctions(){
-        jsonParser = new JSONParser();
+    public UserFunctions(Context context){
+        mContext =  context;
     }
 
     /**
@@ -39,7 +37,9 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("tag", login_tag));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(loginURL, params);
+
+        JSONParser jsonParser = new JSONParser(loginURL, params,mContext);
+        JSONObject json = jsonParser.getJSONFromUrl();
 
         return json;
     }
@@ -51,13 +51,21 @@ public class UserFunctions {
      * */
     public JSONObject registerUser(String name,  String password){
         // Building Parameters
+
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("password", password));
 
         // getting JSON Object
-        JSONObject json = jsonParser.getJSONFromUrl(registerURL, params);
+        JSONParser jsonParser = new JSONParser(registerURL, params,mContext);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        JSONObject json = jsonParser.getJSONFromUrl();
+        Log.i("JSON4", json.toString());
         // return json
         return json;
     }

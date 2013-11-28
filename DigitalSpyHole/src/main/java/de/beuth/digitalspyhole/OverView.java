@@ -24,7 +24,7 @@ public class OverView extends Activity  {
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
         // Check login status in database
-        userFunctions = new UserFunctions();
+        userFunctions = new UserFunctions(this);
         if(userFunctions.isUserLoggedIn(getApplicationContext())){
             // user already logged in show databoard
             setContentView(R.layout.activity_menu);
