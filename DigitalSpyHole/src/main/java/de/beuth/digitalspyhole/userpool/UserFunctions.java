@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class UserFunctions {
 
-    private static String loginURL = "http://192.168.43.212/android_api/";
-    private static String registerURL = "http://192.168.43.212/android_api/";
+    private static String loginURL = "http://10.0.2.2/android_api/";
+    private static String registerURL = "http://10.0.2.2/android_api/";
 
     private static String login_tag = "login.xml";
     private static String register_tag = "register";

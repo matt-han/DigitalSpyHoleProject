@@ -19,15 +19,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by KingLui on 20.11.13.
  */
 public class JSONParser  {
+
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
+
     String mUrl;
     List <NameValuePair> mParams;
     Context mContext;
@@ -45,7 +50,7 @@ public class JSONParser  {
       return jObj;
     }
 
-    private class innerJSONParser extends AsyncTask <String, Void, JSONObject>
+    public class innerJSONParser extends AsyncTask <String, Void, JSONObject>
     {
 
         @Override
@@ -76,7 +81,7 @@ public class JSONParser  {
                 StringBuilder sb = new StringBuilder();
                 String line = null;
                 while ((line = reader.readLine()) != null) {
-                    sb.append(line + "n");
+                    sb.append(line + "\n");
                 }
                 is.close();
                 json = sb.toString();
@@ -88,7 +93,16 @@ public class JSONParser  {
 
             // try parse the string to a JSON object
             try {
-                return new JSONObject(json);
+                jObj =  new JSONObject(json);
+               return jObj;
+
+               /* Iterator keys = jObj.keys();
+                Map<String, String> map = new HashMap<String, String>();
+                while (keys.hasNext()) {
+                    String key = (String) keys.next();
+                    map.put(key, jObj.getString(key));
+                }
+                System.out.println(map);// this map will contain your json stuff*/
             } catch (JSONException e) {
                 Log.e("JSON Parser", "Error parsing data " + e.toString());
             }

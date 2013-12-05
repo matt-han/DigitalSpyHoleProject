@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "android_api";
 
     // Login table name
-    private static final String TABLE_LOGIN = "login.xml";
+    private static final String TABLE_LOGIN = "login";
 
     // Login Table Columns names
     private static final String KEY_ID = "id";
