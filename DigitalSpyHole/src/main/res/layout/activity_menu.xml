@@ -30,7 +30,7 @@
             android:textColor="#21dbd4"
             android:textStyle="bold"
             android:id="@+id/btnLogout"
-            android:layout_marginTop="80dip"
+            android:layout_marginTop="60dip"
             android:background="@null"/>
     </LinearLayout>
 

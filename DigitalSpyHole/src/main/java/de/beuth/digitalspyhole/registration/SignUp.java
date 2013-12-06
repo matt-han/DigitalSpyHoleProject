@@ -17,6 +17,8 @@ import de.beuth.digitalspyhole.R;
 import de.beuth.digitalspyhole.userpool.*;
 import de.beuth.digitalspyhole.*;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
 public class SignUp extends Activity {
 
     Button btnRegister;
@@ -68,10 +70,10 @@ public class SignUp extends Activity {
                             userFunction.logoutUser(getApplicationContext());
                             db.addUser(json_user.getString(KEY_NAME), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));
                             // Launch Dashboard Screen
-                            Intent dashboard = new Intent(getApplicationContext(), OverView.class);
+                            Intent i = new Intent(getApplicationContext(), OverView.class);
                             // Close all views before launching Dashboard
-                            dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(dashboard);
+                            i.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
                             // Close Registration Screen
                             finish();
                         }else{
