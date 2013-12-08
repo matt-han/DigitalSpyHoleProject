@@ -1,0 +1,129 @@
+package gui;
+
+import gui.streamWindow;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class dataWindow {
+	private GridPane gridPane;
+	private Stage stage;
+	TextArea log = new TextArea();
+	Process p;
+
+	public void start(Stage primaryStage)
+	{
+		initGridPaneButtons();
+		
+		primaryStage.setTitle("Datenbank");
+		Button btn_stream = new Button("Stream");
+		HBox btnStream = new HBox(10);
+		btnStream.setAlignment(Pos.BOTTOM_CENTER);
+		btnStream.getChildren().add(btn_stream);
+		gridPane.add(btnStream, 5, 1);
+		btn_stream.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event)
+			{
+				stage = new Stage();
+				// Starten des nächsten Fensters
+				streamWindow streamWin = new streamWindow();
+				streamWin.start(stage);
+			}
+		});
+		gridPane.add(log, 0, 0, 5, 35);
+		try
+		{
+			ProcessBuilder pb = new ProcessBuilder("ping", "spyhole.no-ip.biz",
+					"-n", "100");
+
+			p = pb.start();
+
+			// this thread will read from process without blocking an
+			// application
+			new Thread(new Runnable() {
+				@Override
+				public void run()
+				{
+					try
+					{
+						// try-with-resources from jdk7, change it back if you
+						// use older jdk
+						try (BufferedReader bri = new BufferedReader(
+								new InputStreamReader(p.getInputStream())))
+						{
+							String line;
+
+							while ((line = bri.readLine()) != null)
+							{
+								log(line);
+							}
+						}
+					} catch (IOException ex)
+					{
+						ex.printStackTrace();
+					}
+				}
+			}).start();
+
+	        StackPane root = new StackPane();
+	        root.getChildren().addAll(gridPane);
+	        primaryStage.setScene(new Scene(root, 750, 450));
+	        root.getStylesheets().add("myStyle.css");
+	        primaryStage.show();
+
+		} catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
+	}
+
+	public void stop() throws Exception
+	{
+		// super.stop();
+		// this called on fx app close, you may call it in user action handler
+		if (p != null)
+		{
+			p.destroy();
+		}
+	}
+
+	private void log(final String st)
+	{
+		// we can access fx objects only from fx thread
+		// so we need to wrap log access into Platform#runLater
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run()
+			{
+				log.setText(st + "\n" + log.getText());
+			}
+		});
+	}
+
+	private void initGridPaneButtons()
+	{
+		gridPane = new GridPane();
+		gridPane.setAlignment(Pos.TOP_RIGHT);
+		gridPane.setHgap(30);
+		gridPane.setVgap(10);
+		gridPane.setPadding(new Insets(0, 25, 0, 25));
+	}
+
+}
