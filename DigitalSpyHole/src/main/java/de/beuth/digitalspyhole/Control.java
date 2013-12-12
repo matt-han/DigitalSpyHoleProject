@@ -13,16 +13,41 @@ import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.VideoView;
+import android.webkit.WebView;
+
+/*
+// gehört in activity_main.xml
+<VideoView
+            android:id="@+id/videoView1"
+            android:layout_width="228dp"
+            android:layout_height="274dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="20dp" >
+
+        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/webview"
+            android:layout_width="228dp"
+            android:layout_height="274dp" />
+    </LinearLayout>
+
+
+ */
 
 public class Control extends Activity implements View.OnClickListener {
 
 
     private Button open;
     private ProgressDialog pDialog;
-    private VideoView videoView;
+    //private VideoView videoView;
+    private WebView webView;
 
     //URL to motion server
-    private String videoUrl = "http://192.168.1.23:8081/";
+    //private String videoUrl = "http://spyhole.no-ip.biz:1900/stream_simple.html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +56,8 @@ public class Control extends Activity implements View.OnClickListener {
 
         //refer to the id's
         open = (Button)findViewById(R.id.open_door);
-        videoView = (VideoView)findViewById(R.id.videoView1);
+        //videoView = (VideoView)findViewById(R.id.videoView1);
+        webView = (WebView) findViewById(R.id.webview);
 
         //connect to the listener
         open.setOnClickListener(this);
@@ -47,7 +73,12 @@ public class Control extends Activity implements View.OnClickListener {
         // Show progressbar
         pDialog.show();
 
-        try {
+        webView.setAlwaysDrawnWithCacheEnabled(true);
+        //webView.setClickable(false);
+        webView.loadUrl("http://rack.2.mshcdn.com/media/ZgkyMDEyLzEwLzE5LzExXzMzXzMzXzI5X2ZpbGUKcAl0aHVtYgkxMjAweDk2MDA-/b214a804");
+
+        pDialog.hide();
+        /*try {
             // Start the MediaController
             MediaController mediacontroller = new MediaController(
                     Control.this);
@@ -69,7 +100,7 @@ public class Control extends Activity implements View.OnClickListener {
                 pDialog.dismiss();
                 videoView.start();
             }
-        });
+        });*/
     }
 
     @Override

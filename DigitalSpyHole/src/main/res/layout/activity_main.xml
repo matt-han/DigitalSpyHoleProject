@@ -13,8 +13,8 @@
         android:orientation="vertical"
         android:paddingTop="20dp" >
 
-        <VideoView
-            android:id="@+id/videoView1"
+        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/webview"
             android:layout_width="228dp"
             android:layout_height="274dp" />
     </LinearLayout>
