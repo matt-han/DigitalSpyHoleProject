@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.net.Uri;
+import android.webkit.WebSettings;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
@@ -47,7 +48,7 @@ public class Control extends Activity implements View.OnClickListener {
     private WebView webView;
 
     //URL to motion server
-    //private String videoUrl = "http://spyhole.no-ip.biz:1900/stream_simple.html";
+    //private String videoUrl = "http://192.168.1.100:1900/stream_simple.html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,8 @@ public class Control extends Activity implements View.OnClickListener {
         //connect to the listener
         open.setOnClickListener(this);
 
+        webView.getSettings().setJavaScriptEnabled(true);
+
         // Create a progressbar
         pDialog = new ProgressDialog(Control.this);
         // Set progressbar title
@@ -73,12 +76,14 @@ public class Control extends Activity implements View.OnClickListener {
         // Show progressbar
         pDialog.show();
 
-        webView.setAlwaysDrawnWithCacheEnabled(true);
-        //webView.setClickable(false);
-        webView.loadUrl("http://rack.2.mshcdn.com/media/ZgkyMDEyLzEwLzE5LzExXzMzXzMzXzI5X2ZpbGUKcAl0aHVtYgkxMjAweDk2MDA-/b214a804");
-
+        //webView.setAlwaysDrawnWithCacheEnabled(true);
+        webView.setClickable(false);
+        //webView.loadUrl("http://rack.2.mshcdn.com/media/ZgkyMDEyLzEwLzE5LzExXzMzXzMzXzI5X2ZpbGUKcAl0aHVtYgkxMjAweDk2MDA-/b214a804");
+        webView.loadUrl("http://192.168.1.100:1900/javascript_simple.html");
         pDialog.hide();
-        /*try {
+
+/*
+        try {
             // Start the MediaController
             MediaController mediacontroller = new MediaController(
                     Control.this);

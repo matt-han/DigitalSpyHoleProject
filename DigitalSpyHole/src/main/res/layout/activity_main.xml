@@ -17,6 +17,7 @@
             android:id="@+id/webview"
             android:layout_width="228dp"
             android:layout_height="274dp" />
+
     </LinearLayout>
 
     <LinearLayout
