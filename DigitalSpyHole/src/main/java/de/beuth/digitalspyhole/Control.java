@@ -16,39 +16,14 @@ import android.widget.ProgressBar;
 import android.widget.VideoView;
 import android.webkit.WebView;
 
-/*
-// gehört in activity_main.xml
-<VideoView
-            android:id="@+id/videoView1"
-            android:layout_width="228dp"
-            android:layout_height="274dp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingTop="20dp" >
-
-        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/webview"
-            android:layout_width="228dp"
-            android:layout_height="274dp" />
-    </LinearLayout>
-
-
- */
 
 public class Control extends Activity implements View.OnClickListener {
 
 
     private Button open;
     private ProgressDialog pDialog;
-    //private VideoView videoView;
-    private WebView webView;
 
-    //URL to motion server
-    //private String videoUrl = "http://192.168.1.100:1900/stream_simple.html";
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +38,11 @@ public class Control extends Activity implements View.OnClickListener {
         //connect to the listener
         open.setOnClickListener(this);
 
+        // setup webview
+        // javascript allows to play videos
         webView.getSettings().setJavaScriptEnabled(true);
+        //webView.setAlwaysDrawnWithCacheEnabled(true);
+        webView.setClickable(false);
 
         // Create a progressbar
         pDialog = new ProgressDialog(Control.this);
@@ -76,36 +55,12 @@ public class Control extends Activity implements View.OnClickListener {
         // Show progressbar
         pDialog.show();
 
-        //webView.setAlwaysDrawnWithCacheEnabled(true);
-        webView.setClickable(false);
+        // load and show the website
         //webView.loadUrl("http://rack.2.mshcdn.com/media/ZgkyMDEyLzEwLzE5LzExXzMzXzMzXzI5X2ZpbGUKcAl0aHVtYgkxMjAweDk2MDA-/b214a804");
         webView.loadUrl("http://192.168.1.100:1900/javascript_simple.html");
+
         pDialog.hide();
 
-/*
-        try {
-            // Start the MediaController
-            MediaController mediacontroller = new MediaController(
-                    Control.this);
-            mediacontroller.setAnchorView(videoView);
-            // Get the URL from String VideoURL
-            Uri video = Uri.parse(videoUrl);
-            videoView.setMediaController(mediacontroller);
-            videoView.setVideoURI(video);
-
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-
-        videoView.requestFocus();
-        videoView.setOnPreparedListener(new OnPreparedListener() {
-            // Close the progress bar and play the video
-            public void onPrepared(MediaPlayer mp) {
-                pDialog.dismiss();
-                videoView.start();
-            }
-        });*/
     }
 
     @Override
