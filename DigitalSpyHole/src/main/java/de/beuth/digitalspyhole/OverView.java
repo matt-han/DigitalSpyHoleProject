@@ -27,6 +27,7 @@ public class OverView extends Activity implements View.OnClickListener {
 
         control = (Button)findViewById(R.id.menu_control);
         database = (Button)findViewById(R.id.menu_database);
+        control.setOnClickListener(this);
     }
 
 
