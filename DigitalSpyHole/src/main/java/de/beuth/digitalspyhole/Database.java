@@ -1,19 +1,24 @@
 package de.beuth.digitalspyhole;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.util.Log;
+import android.widget.ArrayAdapter;
 
-import org.omg.CORBA.NameValuePair;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.apache.http.NameValuePair;
 
-import java.lang.InterruptedException;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Database extends ListActivity {
@@ -99,7 +104,7 @@ public class Database extends ListActivity {
 
 
     public void fillList() {
-        this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.activtiy_database, results));
+        this.setListAdapter(new ArrayAdapter<String>(this, android.R.layout.activity_list_item, results));
     }
 
 }
