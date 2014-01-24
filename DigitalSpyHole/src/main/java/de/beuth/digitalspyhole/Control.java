@@ -57,7 +57,7 @@ public class Control extends Activity implements View.OnClickListener {
 
         // load and show the website
         //webView.loadUrl("http://rack.2.mshcdn.com/media/ZgkyMDEyLzEwLzE5LzExXzMzXzMzXzI5X2ZpbGUKcAl0aHVtYgkxMjAweDk2MDA-/b214a804");
-        webView.loadUrl("http://192.168.1.100:1900/javascript_simple.html");
+        webView.loadUrl("http://spyhole.no-ip.biz/javascript_simple.html");
 
         pDialog.hide();
 
