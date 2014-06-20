@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DigitalSpyHole</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="benutzername">Benutzername</string>
+    <string name="vorname">Vorname</string>
+    <string name="nachname">Nachname</string>
+    <string name="passwort">Passwort</string>
+    <string name="passwort2">Passwort zur Bestätigung</string>
+	<string name="registrieren">Registrieren</string>
+	<string name="speichern">speichern</string>
+	<string name="tuer_entriegler">Tür entriegeln</string>
+	<string name="zurueck">Zurück</string>
+	<string name="beenden">Beenden</string>
+	<string name="email">E-Mail Adresse</string>
+</resources>
